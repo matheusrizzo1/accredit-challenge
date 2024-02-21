@@ -1,7 +1,5 @@
 ﻿using Accredit.Challenge.Borders.Exceptions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -19,10 +17,6 @@ namespace Accredit.Challenge.Repositories.HttpClients
 
         protected async Task<TResponse> Execute<TResponse>(string uri)
         {
-            var serializerSettings = new JsonSerializerSettings();
-            serializerSettings.Converters.Add(new StringEnumConverter());
-            serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-
             HttpResponseMessage response = null;
 
             try

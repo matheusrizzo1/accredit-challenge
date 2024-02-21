@@ -42,6 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GithubService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Accredit.Challenge.Borders\Accredit.Challenge.Borders.csproj">
+      <Project>{E22FB8C0-2075-4494-8F88-5C2F652F7033}</Project>
+      <Name>Accredit.Challenge.Borders</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
