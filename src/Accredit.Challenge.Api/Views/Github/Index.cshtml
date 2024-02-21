@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Github users</h2>
+
+<div class="container">
+    <input id="username" type="text" placeholder="Enter a Github username" />
+    <button onclick="findUser()">Find</button>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready({
+
+        });
+
+        function findUser() {
+            var username = $("#username").val();
+            if (!username) {
+                alert('Username must not be empty');
+                return;
+            }
+
+
+            $.ajax({
+                url: '@Url.Action("GetUser")?username=' + username,
+                beforeSend: function () {
+                    console.log('loading');
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            })
+        }
+    </script>
+}
