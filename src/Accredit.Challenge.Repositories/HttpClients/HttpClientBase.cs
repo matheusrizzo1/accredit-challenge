@@ -21,6 +21,7 @@ namespace Accredit.Challenge.Repositories.HttpClients
 
             try
             {
+                _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
                 response = await _httpClient.GetAsync(uri);
             }
             catch (Exception ex)

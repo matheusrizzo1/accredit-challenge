@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Dtos\GithubRepoDto.cs" />
     <Compile Include="Dtos\GithubUserDto.cs" />
+    <Compile Include="Dtos\JsonResponse.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Exceptions\RepositoryException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
