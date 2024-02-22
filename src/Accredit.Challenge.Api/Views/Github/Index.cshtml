@@ -2,13 +2,41 @@
 @{
     ViewBag.Title = "Index";
 }
+<main>
+    <section class="mx-auto flex flex-col items-center gap-2 py-12 md:pb-8 lg:pb-20">
+        <h1 class="text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
+            GitHub user finder 🔍
+        </h1>
+    </section>
+    <div class="mx-auto flex justify-center items-center gap-2 md:pb-8 lg:pb-20">
+        <input class="p-4 w-80 border rounded-full" id="username" type="text" placeholder="Enter a Github username" />
+        <button onclick="findUser()"><span class="bg-blue-400 rounded-full p-3 text-lg flex hover:bg-blue-300"><i data-lucide="search" class="text-white"></i></span></button>
+    </div>
+    <div class="flex flex-col items-center align-center text-neutral-400" id="placeholder-message">
+        <i data-lucide="clipboard-list" class="my-4 h-10 w-10"></i>
+        <span class="text-lg font-semibold">
+            Nothing to show here
+        </span>
+        <span class="text-sm font-light text-center">
+            Type an github username to search
+        </span>
+    </div>
+    <div class="hidden flex mx-auto justify-between items-center gap-2 px-40" id="user-container">
+        <div class="flex flex-col w-2/4">
+            <img class="rounded-full w-60" id="user-avatar" />
+            <h1 class="text-3xl font-bold mt-4" id="user-name"></h1>
+            <h2 class="flex gap-1 text-gray-400"><i data-lucide="at-sign" class="w-4"></i><span id="user-username"></span></h2>
+            <h3 class="flex gap-1"><i data-lucide="map-pin" class="w-4"></i><span id="user-location"></span></h3>
+        </div>
+        <div class="flex flex-col w-full">
+            <h1 class="text-3xl font-bold">Repos</h1>
+            <div id="repos" class="mt-4"></div>
+        </div>
+        <div>
 
-<h2>Github users</h2>
-
-<div class="container">
-    <input id="username" type="text" placeholder="Enter a Github username" />
-    <button onclick="findUser()">Find</button>
-</div>
+        </div>
+    </div>
+</main>
 
 @section scripts{
     <script>
@@ -23,16 +51,80 @@
                 return;
             }
 
-
             $.ajax({
                 url: '@Url.Action("GetUser")?username=' + username,
                 beforeSend: function () {
-                    console.log('loading');
+                    $("#user-container").addClass("hidden");
+                    $("#placeholder-message").addClass("hidden");
+                    clearRepos();
+                    showLoader();
                 },
-                success: function (data) {
-                    console.log(data);
+                success: function (res) {
+                    if (res.success) {
+                        $("#user-avatar").attr("src", res.data.Avatar_Url);
+                        $("#user-name").text(res.data.Name);
+                        $("#user-username").text(res.data.Login);
+                        $("#user-location").text(res.data.Location);
+                        getRepos(username);
+                    }
+                    else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: res.msg
+                        });
+                        $("#user-container").addClass("hidden");
+                        $("#placeholder-message").removeClass("hidden");
+                    }
                 }
             })
+        }
+
+        function getRepos(username) {
+            $.ajax({
+                url: '@Url.Action("GetRepos")?username=' + username,
+                beforeSend: function () {
+                    console.log('loading');
+                },
+                success: function (res) {
+                    if (res.success) {
+                        $.each(res.data, function (key, repo) {
+                            var repoElem = `<div class="flex align-center p-4 items-center border border-neutral-400/20 shadow rounded-lg text-xs md:text-sm even:my-2 last:my-0 justify-between cursor-pointer hover:bg-gray-50">
+                                        <div class="flex items-center gap-2 mr-4">
+                                            <a href="${repo.Html_Url}" target="_blank">${repo.Name}</a>
+                                        </div>
+                                        <span class="md:text-center truncate w-3/4">${(repo.Description ? repo.Description : 'No description')}</span>
+                                        <span class="text-right flex gap-1 items-center">
+                                            <i data-lucide="star" class="w-4"></i><span>${repo.Stargazers_Count}</span>
+                                        </span>
+                                    </div>`;
+                            $("#repos").append(repoElem);
+                        });
+                        lucide.createIcons();
+                    }
+                },
+                complete: function () {
+                    closeLoader();
+                    $("#user-container").removeClass("hidden");
+                }
+            })
+        }
+
+        function showLoader() {
+            Swal.fire({
+                title: "Loading",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+        }
+        function closeLoader()
+        {
+            swal.close();
+        }
+        function clearRepos() {
+            $("#repos").html('');
         }
     </script>
 }

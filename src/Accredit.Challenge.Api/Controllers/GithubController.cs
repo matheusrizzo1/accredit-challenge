@@ -45,5 +45,29 @@ namespace Accredit.Challenge.Api.Controllers
 
             return Json(res, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<JsonResult> GetRepos(string username)
+        {
+            var res = new JsonResponse { success = true };
+            try
+            {
+                var repos = await _githubService.GetUserRepos(username);
+
+                res.data = repos;
+            }
+            catch (NotFoundException)
+            {
+                res.success = false;
+                res.msg = $"Repos for username '{username}' was not found";
+            }
+            catch (Exception)
+            {
+
+                res.success = false;
+                res.msg = "An unexpected error occurred";
+            }
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
     }
 }
