@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accredit.Challenge.Reposito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accredit.Challenge.Services", "src\Accredit.Challenge.Services\Accredit.Challenge.Services.csproj", "{6DAB0786-D722-4095-8821-7D4BB296C3C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accredit.Challenge.Tests", "src\Accredit.Challenge.Tests\Accredit.Challenge.Tests.csproj", "{2D92143D-2540-461E-8940-424153E6A7DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6DAB0786-D722-4095-8821-7D4BB296C3C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DAB0786-D722-4095-8821-7D4BB296C3C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DAB0786-D722-4095-8821-7D4BB296C3C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D92143D-2540-461E-8940-424153E6A7DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D92143D-2540-461E-8940-424153E6A7DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D92143D-2540-461E-8940-424153E6A7DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D92143D-2540-461E-8940-424153E6A7DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
