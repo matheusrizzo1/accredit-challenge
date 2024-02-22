@@ -200,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Views\Github\_Repos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Accredit.Challenge.Borders\Accredit.Challenge.Borders.csproj">
