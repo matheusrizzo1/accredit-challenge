@@ -1,5 +1,5 @@
 
-# Accredit .Net Framework Challenge
+# Accredit Challenge
  
 ## Introduction
 This app is a fullstack challenge using .Net Framework 4.8 to get user info from GitHub api.
@@ -21,7 +21,7 @@ Sources:
  
 **Environment**  
 1.  Install PowerShell Core 7.x.
-1.  Install .NET Framework 4.8.
+2.  Install .NET Framework 4.8.
  
 **Application** 
 1. Run git clone command in Powershell:
@@ -30,3 +30,5 @@ Sources:
     ```
 
 2. Open Accredit.Challenge.sln with Visual Studio and press F5 to run.
+
+>Note: If you get 'Could not find a part of the path ... bin\roslyn\csc.exe' error, please Clean and Rebuild the solution.
